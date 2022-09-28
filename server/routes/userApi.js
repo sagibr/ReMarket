@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require(`../models/user`);
 
 router.get(`/users`, (req, res, next) => {
-  User.find({})
+  User.find({ email: req.body.email, password: req.body.password })
     .then((data) => res.json(data))
     .catch(next);
 });
