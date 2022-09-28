@@ -1,6 +1,8 @@
 const express = require("express")
 const app = express()
 const port = 3001
+const userRoutes = require("./routes/itemApi")
+const userRoutes = require("./routes/userApi")
 
 const { default: mongoose } = require("mongoose")
 const bodyParser = require("body-parser")
@@ -21,6 +23,10 @@ app.use((req, res, next) => {
   next()
 })
 app.use(bodyParser.json())
+
+app.use("/", itemApi)
+
+app.use("/", userApi)
 
 app.use((req, err, next) => {
   console.log(err)
