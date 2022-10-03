@@ -1,15 +1,16 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Disclosure, Menu, Transition } from "@headlessui/react"
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline"
-import { Fragment } from "react"
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Fragment } from "react";
+import { Link } from "react-router-dom";
 
 const navigation = [
-  { name: "Home", href: "#", current: true },
-  { name: "Products", href: "#" },
-]
+  { name: "Home", href: "/", current: true },
+  { name: "Products", href: "/products" },
+];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(" ")
+  return classes.filter(Boolean).join(" ");
 }
 
 export default function Example() {
@@ -34,12 +35,12 @@ export default function Example() {
                 <div className="flex flex-shrink-0 items-center">
                   <img
                     className="block h-8 w-auto lg:hidden"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                    src="https://pps.whatsapp.net/v/t61.24694-24/294240288_737344717498710_6107413829790180793_n.jpg?ccb=11-4&oh=01_AVxW-vF3AhTWbEkVB270f2etkq70Gscq1zt0QXH9ijiNWw&oe=6348BB42"
                     alt="Your Company"
                   />
                   <img
                     className="hidden h-8 w-auto lg:block"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                    src="https://pps.whatsapp.net/v/t61.24694-24/294240288_737344717498710_6107413829790180793_n.jpg?ccb=11-4&oh=01_AVxW-vF3AhTWbEkVB270f2etkq70Gscq1zt0QXH9ijiNWw&oe=6348BB42"
                     alt="Your Company"
                   />
                 </div>
@@ -79,7 +80,7 @@ export default function Example() {
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        src="https://pps.whatsapp.net/v/t61.24694-24/215742736_169130348833804_5618789588749101516_n.jpg?ccb=11-4&oh=01_AVxCtQYSX2EbN2U0Y04R7EjMMI3dgqM8JDIFWqIQrsYFzg&oe=63489F59"
                         alt=""
                       />
                     </Menu.Button>
@@ -96,41 +97,32 @@ export default function Example() {
                     <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <Menu.Item>
                         {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
-                            )}
-                          >
-                            Your Profile
-                          </a>
+                          <Link to="register">
+                            <a
+                              href="/"
+                              className={classNames(
+                                active ? "bg-gray-100" : "",
+                                "block px-4 py-2 text-sm text-gray-700"
+                              )}
+                            >
+                              Register
+                            </a>
+                          </Link>
                         )}
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
-                            )}
-                          >
-                            Settings
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
-                            )}
-                          >
-                            Sign out
-                          </a>
+                          <Link to="login">
+                            <a
+                              href="/"
+                              className={classNames(
+                                active ? "bg-gray-100" : "",
+                                "block px-4 py-2 text-sm text-gray-700"
+                              )}
+                            >
+                              Log-in
+                            </a>
+                          </Link>
                         )}
                       </Menu.Item>
                     </Menu.Items>
@@ -163,5 +155,5 @@ export default function Example() {
         </>
       )}
     </Disclosure>
-  )
+  );
 }

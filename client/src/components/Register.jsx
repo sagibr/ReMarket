@@ -50,34 +50,79 @@ function Register() {
   };
 
   return (
-    <div className="Register">
-      <h1>REGISTER</h1>
+    <div className="w-full  flex justify-center items-center mt-16">
+      <div className="w-full max-w-xs text-center">
+        <div className="bg-white shadow-xl rounded px-8 pt-6 pb-8 mb-4">
+          <h1 className="text-black  text-3xl mb-5 ">REGISTER</h1>
 
-      <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label>First Name</label>
-          <input {...register("name")} />
-          {errors?.name && <p>{errors?.name?.message || "Error!"}</p>}
+          <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
+            <div>
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                First Name
+              </label>
+              <input
+                {...register("name")}
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+              {errors?.name && (
+                <p className="text-red-600">
+                  {errors?.name?.message || "Error!"}
+                </p>
+              )}
+            </div>
+            <div>
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Phone Number{" "}
+              </label>
+              <input
+                {...register("phoneNumber")}
+                placeholder="0505555555"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+              {errors?.phoneNumber && (
+                <p className="text-red-600">
+                  {errors?.phoneNumber?.message || "Error!"}
+                </p>
+              )}
+            </div>
+            <div>
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Email Address
+              </label>
+              <input
+                {...register("email")}
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+              {errors?.email && (
+                <p className="text-red-600">
+                  {errors?.email?.message || "Error!"}
+                </p>
+              )}
+            </div>
+            <div>
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Password
+              </label>
+              <input
+                type="password"
+                {...register("password")}
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+              {errors?.password && (
+                <p className="text-red-600">
+                  {errors?.password?.message || "Error!"}
+                </p>
+              )}
+            </div>
+            <input
+              value="SUBMIT"
+              type="submit"
+              disabled={!isValid}
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-5"
+            />
+          </form>
         </div>
-        <div>
-          <label>Phone Number </label>
-          <input {...register("phoneNumber")} placeholder="0505555555" />
-          {errors?.phoneNumber && (
-            <p>{errors?.phoneNumber?.message || "Error!"}</p>
-          )}
-        </div>
-        <div>
-          <label>Email Address</label>
-          <input {...register("email")} />
-          {errors?.email && <p>{errors?.email?.message || "Error!"}</p>}
-        </div>
-        <div>
-          <label>Password</label>
-          <input type="password" {...register("password")} />
-          {errors?.password && <p>{errors?.password?.message || "Error!"}</p>}
-        </div>
-        <input value="SUBMIT" type="submit" disabled={!isValid} />
-      </form>
+      </div>
     </div>
   );
 }
