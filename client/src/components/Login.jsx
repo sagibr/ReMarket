@@ -1,26 +1,23 @@
-import React, { useState } from "react";
-import axios from "axios";
+import axios from "axios"
+import React, { useState } from "react"
 
 function Login() {
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("")
+  const [email, setEmail] = useState("")
   const handlePasswordChange = (value) => {
-    setPassword(value);
-    console.log(password);
-  };
+    setPassword(value)
+    console.log(password)
+  }
   const handleEmailChange = (value) => {
-    setEmail(value);
-    console.log(email);
-  };
+    setEmail(value)
+    console.log(email)
+  }
 
   const handleSubmit = () => {
     axios
-      .get(`http://localhost:3001/users`, {
-        password: password,
-        email: email,
-      })
-      .then((res) => res.data && console.log(res.data));
-  };
+      .post(`http://localhost:3001/login`, { email: email, password: password })
+      .then((res) => res.data && console.log(res.data))
+  }
   return (
     <div>
       <div className="Login">
@@ -30,7 +27,7 @@ function Login() {
           <input
             type="text"
             onChange={(e) => {
-              handleEmailChange(e.target.value);
+              handleEmailChange(e.target.value)
             }}
           />
         </div>
@@ -39,14 +36,14 @@ function Login() {
           <input
             type="password"
             onChange={(e) => {
-              handlePasswordChange(e.target.value);
+              handlePasswordChange(e.target.value)
             }}
           />
         </div>
         <button onClick={() => handleSubmit()}>Submit</button>
       </div>
     </div>
-  );
+  )
 }
 
-export default Login;
+export default Login
