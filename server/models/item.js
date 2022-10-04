@@ -9,10 +9,10 @@ const ItemSchema = mongoose.Schema({
   startDate: { type: Date, default: new Date() },
   lastDate: { type: Date, required: true },
   winner: {
-    name: { type: String, required: true },
-    email: { type: String, required: true },
-    password: { type: String, required: true },
-    phone: { type: String, required: true },
+    name: { type: String },
+    email: { type: String },
+    password: { type: String },
+    phone: { type: String },
   },
 })
 

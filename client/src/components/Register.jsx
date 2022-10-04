@@ -1,8 +1,8 @@
-import { useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { yupResolver } from "@hookform/resolvers/yup"
+import axios from "axios"
+import { useEffect, useState } from "react"
+import { useForm } from "react-hook-form"
+import * as yup from "yup"
 
 const schema = yup.object().shape({
   name: yup
@@ -21,33 +21,33 @@ const schema = yup.object().shape({
     .min(6, "Must be minimum 6 digits long")
     .max(20, "Must be maximum 20 digits long"),
   email: yup.string().email().required(),
-});
+})
 
 function Register() {
-  const [users, setUsers] = useState();
+  const [users, setUsers] = useState()
 
   const getUsers = () => {
     axios.get(`http://localhost:3001/users`).then((res) => {
-      res.data && setUsers(res.data);
-    });
-  };
-  console.log(users);
+      res.data && setUsers(res.data)
+    })
+  }
+  console.log(users)
 
   useEffect(() => {
-    getUsers();
-  }, []);
+    getUsers()
+  }, [])
 
   const {
     register,
     formState: { errors, isValid },
     handleSubmit,
-  } = useForm({ mode: "onBlur", resolver: yupResolver(schema) });
+  } = useForm({ mode: "onBlur", resolver: yupResolver(schema) })
 
   const onSubmit = async (data) => {
-    setUsers([...users, data]);
-    await axios.post(`http://localhost:3001/users`, data);
-    console.log(users);
-  };
+    setUsers([...users, data])
+    await axios.post(`http://localhost:3001/register`, data)
+    console.log(users)
+  }
 
   return (
     <div className="w-full  flex justify-center items-center mt-16">
@@ -124,7 +124,7 @@ function Register() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default Register;
+export default Register
