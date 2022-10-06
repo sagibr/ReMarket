@@ -1,16 +1,16 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Disclosure, Menu, Transition } from "@headlessui/react"
+import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline"
+import { Fragment } from "react"
+import { Link } from "react-router-dom"
 
 const navigation = [
   { name: "Home", href: "/", current: true },
   { name: "Products", href: "/products" },
-];
+]
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(" ")
 }
 
 export default function Example() {
@@ -47,19 +47,20 @@ export default function Example() {
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className={classNames(
-                          item.current
-                            ? "bg-gray-900 text-white"
-                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                          "px-3 py-2 rounded-md text-sm font-medium"
-                        )}
-                        aria-current={item.current ? "page" : undefined}
-                      >
-                        {item.name}
-                      </a>
+                      <Link to={item.href}>
+                        <p
+                          key={item.name}
+                          className={classNames(
+                            item.current
+                              ? "bg-gray-900 text-white"
+                              : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                            "px-3 py-2 rounded-md text-sm font-medium"
+                          )}
+                          aria-current={item.current ? "page" : undefined}
+                        >
+                          {item.name}
+                        </p>
+                      </Link>
                     ))}
                   </div>
                 </div>
@@ -98,7 +99,7 @@ export default function Example() {
                       <Menu.Item>
                         {({ active }) => (
                           <Link to="register">
-                            <a
+                            <p
                               href="/"
                               className={classNames(
                                 active ? "bg-gray-100" : "",
@@ -106,14 +107,14 @@ export default function Example() {
                               )}
                             >
                               Register
-                            </a>
+                            </p>
                           </Link>
                         )}
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
                           <Link to="login">
-                            <a
+                            <p
                               href="/"
                               className={classNames(
                                 active ? "bg-gray-100" : "",
@@ -121,7 +122,7 @@ export default function Example() {
                               )}
                             >
                               Log-in
-                            </a>
+                            </p>
                           </Link>
                         )}
                       </Menu.Item>
@@ -155,5 +156,5 @@ export default function Example() {
         </>
       )}
     </Disclosure>
-  );
+  )
 }

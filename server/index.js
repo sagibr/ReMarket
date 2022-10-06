@@ -4,10 +4,12 @@ const port = 3001
 const itemRoutes = require("./routes/itemApi")
 const userRoutes = require("./routes/userApi")
 const cookieParser = require("cookie-parser")
-
+const cors = require("cors")
 const { default: mongoose } = require("mongoose")
 const bodyParser = require("body-parser")
 const verifyJWT = require("./middleware/verifyJwt")
+
+app.use(cors())
 
 require("dotenv").config()
 mongoose.Promise = global.Promise
@@ -24,6 +26,7 @@ app.use((req, res, next) => {
   )
   next()
 })
+
 app.use(bodyParser.json())
 
 //middleware for cookies
