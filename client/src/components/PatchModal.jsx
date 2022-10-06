@@ -6,6 +6,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 
 export default function PatchModal(props) {
+  const user = useSelector((state) => state.user.user);
   const schema = yup.object().shape({
     lastPrice: yup.number().required().min(props.price),
   });
@@ -24,10 +25,17 @@ export default function PatchModal(props) {
   } = useForm({ mode: "onBlur", resolver: yupResolver(schema) });
 
   const onSubmit = (data) => {
+    const obj = {
+      ...data,
+      winner: {
+        name: user.name.join(""),
+        email: user.email,
+      },
+    };
     axios
       .patch(
         `http://localhost:3001/item/items/${props.id}`,
-        JSON.stringify(data),
+        JSON.stringify(obj),
         config
       )
       .then(props.getData())

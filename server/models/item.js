@@ -16,11 +16,8 @@ const ItemSchema = mongoose.Schema({
   winner: {
     name: { type: String },
     email: { type: String },
-    password: { type: String },
-    phone: { type: String },
   },
 });
-
 const Item = mongoose.model("item", ItemSchema);
 
 module.exports = Item;
