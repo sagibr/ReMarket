@@ -3,14 +3,20 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import PatchModal from "./PatchModal";
+import { useSelector } from "react-redux";
 
 function Product() {
+  const auth = useSelector((state) => state.user.user);
+  const config = {
+    headers: { Authorization: `Bearer ${auth?.accessToken}` },
+  };
+
   const [theItem, setTheItem] = useState({});
   const location = useLocation();
   const { id } = location.state;
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/item/items/${id}`)
+      .get(`http://localhost:3001/item/items/${id}`, config)
       .then((res) => res.data && setTheItem(res.data));
   }, []);
   console.log(theItem[0]?._id);
