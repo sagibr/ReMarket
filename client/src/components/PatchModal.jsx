@@ -1,28 +1,28 @@
-import React from "react";
-import { useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import axios from "axios";
-import { useSelector } from "react-redux";
+import { yupResolver } from "@hookform/resolvers/yup"
+import axios from "axios"
+import React from "react"
+import { useForm } from "react-hook-form"
+import { useSelector } from "react-redux"
+import * as yup from "yup"
 
 export default function PatchModal(props) {
-  const user = useSelector((state) => state.user.user);
+  const user = useSelector((state) => state.user.user)
   const schema = yup.object().shape({
     lastPrice: yup.number().required().min(props.price),
-  });
-  const auth = useSelector((state) => state.user.user);
+  })
+  const auth = useSelector((state) => state.user.user)
   const config = {
     headers: {
       Authorization: `Bearer ${auth?.accessToken}`,
       "Content-Type": "application/json",
     },
-  };
-  const [showModal, setShowModal] = React.useState(false);
+  }
+  const [showModal, setShowModal] = React.useState(false)
   const {
     register,
     formState: { errors, isValid },
     handleSubmit,
-  } = useForm({ mode: "onBlur", resolver: yupResolver(schema) });
+  } = useForm({ mode: "onBlur", resolver: yupResolver(schema) })
 
   const onSubmit = (data) => {
     const obj = {
@@ -31,7 +31,7 @@ export default function PatchModal(props) {
         name: user.name.join(""),
         email: user.email,
       },
-    };
+    }
     axios
       .patch(
         `http://localhost:3001/item/items/${props.id}`,
@@ -39,8 +39,8 @@ export default function PatchModal(props) {
         config
       )
       .then(props.getData())
-      .then(setShowModal(false));
-  };
+      .then(setShowModal(false))
+  }
   return (
     <>
       <button
@@ -104,5 +104,5 @@ export default function PatchModal(props) {
         </>
       ) : null}
     </>
-  );
+  )
 }
