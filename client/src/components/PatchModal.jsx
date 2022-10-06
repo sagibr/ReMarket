@@ -3,12 +3,19 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
-
-const schema = yup.object().shape({
-  lastPrice: yup.number().required(),
-});
+import { useSelector } from "react-redux";
 
 export default function PatchModal(props) {
+  const schema = yup.object().shape({
+    lastPrice: yup.number().required().min(props.price),
+  });
+  const auth = useSelector((state) => state.user.user);
+  const config = {
+    headers: {
+      Authorization: `Bearer ${auth?.accessToken}`,
+      "Content-Type": "application/json",
+    },
+  };
   const [showModal, setShowModal] = React.useState(false);
   const {
     register,
@@ -17,10 +24,14 @@ export default function PatchModal(props) {
   } = useForm({ mode: "onBlur", resolver: yupResolver(schema) });
 
   const onSubmit = (data) => {
-    axios.patch(`http://localhost:3001/item/items/${props.id}`, {
-      lastPrice: data,
-    });
-    console.log(data);
+    axios
+      .patch(
+        `http://localhost:3001/item/items/${props.id}`,
+        JSON.stringify(data),
+        config
+      )
+      .then(props.getData())
+      .then(setShowModal(false));
   };
   return (
     <>

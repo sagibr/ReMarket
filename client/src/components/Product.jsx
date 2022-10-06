@@ -14,10 +14,14 @@ function Product() {
   const [theItem, setTheItem] = useState({});
   const location = useLocation();
   const { id } = location.state;
-  useEffect(() => {
+  const getData = (set) => {
     axios
       .get(`http://localhost:3001/item/items/${id}`, config)
-      .then((res) => res.data && setTheItem(res.data));
+      .then((res) => res.data && set(res.data));
+  };
+
+  useEffect(() => {
+    getData(setTheItem);
   }, []);
   console.log(theItem[0]?._id);
   const date = new Date(theItem[0]?.lastDate);
@@ -52,7 +56,10 @@ function Product() {
             Bids : {theItem[0]?.bids}
           </span>
           <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-            Price : {theItem[0]?.startPrice}
+            Price :{" "}
+            {theItem[0]?.lastPrice
+              ? theItem[0]?.lastPrice
+              : theItem[0]?.startPrice}
           </span>
           <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-red-900 mr-2 mb-2">
             Last Date :
@@ -64,7 +71,13 @@ function Product() {
           </span>
         </div>
       </div>
-      <PatchModal id={theItem[0]?._id} />
+      <PatchModal
+        id={theItem[0]?._id}
+        price={
+          theItem[0]?.lastPrice ? theItem[0]?.lastPrice : theItem[0]?.startPrice
+        }
+        getData={() => getData(setTheItem)}
+      />
     </div>
   );
 }

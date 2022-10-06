@@ -1,27 +1,25 @@
-
-import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
-import { Link } from "react-router-dom"
-import axios from "../api/axios"
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import axios from "../api/axios";
 import Modal from "./Modal";
 
-
 function Products() {
-  const [products, setProducts] = useState([])
-  const PRODUCT_URL = "/item/items"
-  const auth = useSelector((state) => state.user.user)
+  const [products, setProducts] = useState([]);
+  const PRODUCT_URL = "/item/items";
+  const auth = useSelector((state) => state.user.user);
 
   const config = {
     headers: { Authorization: `Bearer ${auth?.accessToken}` },
-  }
+  };
 
   useEffect(() => {
-    console.log(auth)
+    console.log(auth);
     axios
 
       .get(PRODUCT_URL, config)
-      .then((res) => res.data && setProducts(res.data))
-  }, [])
+      .then((res) => res.data && setProducts(res.data));
+  }, []);
 
   return (
     <div className="w-full text-center">
@@ -30,7 +28,7 @@ function Products() {
       <div className="flex w-screen flex-wrap">
         {products.map((product, index) => {
           return (
-            <div key={index} className="w-36 m-10">
+            <div key={index} className="w-56 m-10">
               <h1 className="text-3xl">{product.name}</h1>
               <img src={product.images} alt="" className="mt-8" />
               <Link to="/product" state={{ id: product._id }}>
@@ -39,11 +37,11 @@ function Products() {
                 </button>
               </Link>
             </div>
-          )
+          );
         })}
       </div>
     </div>
-  )
+  );
 }
 
-export default Products
+export default Products;
