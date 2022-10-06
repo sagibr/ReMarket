@@ -1,3 +1,4 @@
+
 const express = require("express")
 const app = express()
 const port = 3001
@@ -16,10 +17,10 @@ mongoose.Promise = global.Promise
 mongoose
   .connect(process.env.DB, { useNewUrlParser: true })
   .then(() => console.log("connected to database"))
-  .catch((err) => console.log(err))
+  .catch((err) => console.log(err));
 
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*")
+  res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
@@ -29,22 +30,23 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.json())
 
+
 //middleware for cookies
-app.use(cookieParser())
+app.use(cookieParser());
 
-app.use("/user", userRoutes)
-app.use("/refresh", require("./routes/refresh"))
-app.use("/logout", require("./routes/logout"))
+app.use("/user", userRoutes);
+app.use("/refresh", require("./routes/refresh"));
+app.use("/logout", require("./routes/logout"));
 
-app.use(verifyJWT)
+// app.use(verifyJWT)
 
-app.use("/item", itemRoutes)
+app.use("/item", itemRoutes);
 
 app.use((req, err, next) => {
-  console.log(err)
-  next()
-})
+  console.log(err);
+  next();
+});
 
 app.listen(port, () => {
-  console.log(`server is up and runing on port ${port}`)
-})
+  console.log(`server is up and runing on port ${port}`);
+});
