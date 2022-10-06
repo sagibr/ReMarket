@@ -1,18 +1,14 @@
 const express = require(`express`)
 const router = express.Router()
 const User = require(`../models/user`)
+const { handleNewUser } = require("../controllers/registerController")
+const { handleLogin } = require("../controllers/authController")
 
 router.post(`/login`, (req, res, next) => {
-  User.find({ email: req.body.email, password: req.body.password })
-    .then((data) => res.json(data))
-    .catch(next)
+  handleLogin(req, res)
 })
-router.post(`/users`, (req, res, next) => {
-  req.body
-    ? User.create(req.body)
-        .then((data) => res.json(data))
-        .catch(next)
-    : res.json({ error: `Please enter an input` })
+router.post(`/register`, (req, res, next) => {
+  handleNewUser(req, res)
 })
 
 router.delete(`/users/:id`, (req, res, next) => {
