@@ -1,33 +1,33 @@
-import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
-import { useLocation } from "react-router-dom"
-import axios from "../api/axios"
-import PatchModal from "./PatchModal"
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
+import axios from "../api/axios";
+import PatchModal from "./PatchModal";
 
 function Product() {
-  const auth = useSelector((state) => state.user.user)
+  const auth = useSelector((state) => state.user.user);
   const config = {
     headers: { Authorization: `Bearer ${auth?.accessToken}` },
-  }
+  };
 
-  const [theItem, setTheItem] = useState({})
-  const location = useLocation()
-  const { id } = location.state
-  const GET_ITEM_URL = `/item/items/${id}`
+  const [theItem, setTheItem] = useState({});
+  const location = useLocation();
+  const { id } = location.state;
+  const GET_ITEM_URL = `/item/items/${id}`;
   const getData = (set) => {
-    axios.get(GET_ITEM_URL, config).then((res) => res.data && set(res.data))
-  }
+    axios.get(GET_ITEM_URL, config).then((res) => res.data && set(res.data));
+  };
 
   useEffect(() => {
-    getData(setTheItem)
-  }, [])
-  console.log(theItem[0]?._id)
-  const date = new Date(theItem[0]?.lastDate)
-  const date1 = new Date(theItem[0]?.startDate)
-  date.setHours(0, 0, 0, 0)
-  date1.setHours(0, 0, 0, 0)
+    getData(setTheItem);
+  }, []);
+  console.log(theItem[0]?._id);
+  const date = new Date(theItem[0]?.lastDate);
+  const date1 = new Date(theItem[0]?.startDate);
+  date.setHours(0, 0, 0, 0);
+  date1.setHours(0, 0, 0, 0);
   function padTo2Digits(num) {
-    return num.toString().padStart(2, "0")
+    return num.toString().padStart(2, "0");
   }
   return (
     <div className="w-screen flex justify-around items-center mt-10">
@@ -54,10 +54,11 @@ function Product() {
             Bids : {theItem[0]?.bids}
           </span>
           <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-            Price :{" "}
+            Last Bid :{" "}
             {theItem[0]?.lastPrice
               ? theItem[0]?.lastPrice
-              : theItem[0]?.startPrice}
+              : theItem[0]?.startPrice}{" "}
+            ₪
           </span>
           <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-red-900 mr-2 mb-2">
             Last Date :
@@ -75,9 +76,10 @@ function Product() {
           theItem[0]?.lastPrice ? theItem[0]?.lastPrice : theItem[0]?.startPrice
         }
         getData={() => getData(setTheItem)}
+        bids={theItem[0]?.bids}
       />
     </div>
-  )
+  );
 }
 
-export default Product
+export default Product;
