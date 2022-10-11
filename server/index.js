@@ -1,50 +1,52 @@
-const express = require("express");
-const app = express();
-const port = 3001;
-const itemRoutes = require("./routes/itemApi");
-const userRoutes = require("./routes/userApi");
-const cookieParser = require("cookie-parser");
-const cors = require("cors");
-const { default: mongoose } = require("mongoose");
-const bodyParser = require("body-parser");
-const verifyJWT = require("./middleware/verifyJwt");
+const express = require("express")
+const app = express()
+const itemRoutes = require("./routes/item/itemApi")
+const userRoutes = require("./routes/user/userApi")
+const adminRoutes = require("./routes/admin/admin")
+const connectDB = require("./config/dbConn")
+const credentials = require("./middleware/credentials")
+const corsOptions = require("./config/corsOptions")
 
-app.use(cors());
+const cookieParser = require("cookie-parser")
+const cors = require("cors")
+const { default: mongoose } = require("mongoose")
+const verifyJWT = require("./middleware/verifyJwt")
+const PORT = process.env.PORT || 3001
 
-require("dotenv").config();
-mongoose.Promise = global.Promise;
-mongoose
-  .connect(process.env.DB, { useNewUrlParser: true })
-  .then(() => console.log("connected to database"))
-  .catch((err) => console.log(err));
+// Connect to MongoDB
+connectDB()
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
+// Handle options credentials check - before CORS!
+// and fetch cookies credentials requirement
+app.use(credentials)
 
-app.use(bodyParser.json());
+// Cross Origin Resource Sharing
+app.use(cors(corsOptions))
+
+// built-in middleware to handle urlencoded form data
+app.use(express.urlencoded({ extended: false }))
+
+// built-in middleware for json
+app.use(express.json())
 
 //middleware for cookies
-app.use(cookieParser());
+app.use(cookieParser())
 
-app.use("/user", userRoutes);
-app.use("/refresh", require("./routes/refresh"));
-app.use("/logout", require("./routes/logout"));
+// routes
+app.use("/refresh", require("./routes/user/refresh"))
+app.use("/logout", require("./routes/user/logout"))
+app.use("/user", userRoutes)
 
-app.use(verifyJWT);
-
-app.use("/item", itemRoutes);
+app.use(verifyJWT)
+app.use("/admin", adminRoutes)
+app.use("/item", itemRoutes)
 
 app.use((req, err, next) => {
-  console.log(err);
-  next();
-});
+  console.log(err)
+  next()
+})
 
-app.listen(port, () => {
-  console.log(`server is up and runing on port ${port}`);
-});
+mongoose.connection.once("open", () => {
+  console.log("Connected to MongoDB")
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
+})

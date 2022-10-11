@@ -1,10 +1,13 @@
 import React, { useEffect, useRef, useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import axios from "../api/axios"
+import { togglePersist } from "../slice/persistSlice"
 import { login } from "../slice/userSlice"
+
 function Login() {
   const dispatch = useDispatch()
+  const persist = useSelector((state) => state.persist.persist)
 
   const navigate = useNavigate()
   const location = useLocation()
@@ -28,6 +31,12 @@ function Login() {
   const handleEmailChange = (value) => {
     setEmail(value)
   }
+  const togglePersistFunction = () => {
+    dispatch(togglePersist())
+  }
+  useEffect(() => {
+    localStorage.setItem("persist", persist)
+  }, [persist])
 
   const handleSubmit = async () => {
     try {
@@ -36,13 +45,13 @@ function Login() {
         JSON.stringify({ email: email, password: password }),
         {
           headers: { "Content-Type": "application/json" },
-          // withCredentials: true,
+          withCredentials: true,
         }
       )
       console.log(JSON.stringify(response?.data))
       const accessToken = response?.data?.accessToken
       const roles = response?.data?.roles
-      const name = response?.data?.name
+      const name = response?.data?.name.join("")
 
       dispatch(
         login({
@@ -129,6 +138,15 @@ function Login() {
           >
             Submit
           </button>
+          <div>
+            <input
+              type="checkbox"
+              id="persist"
+              onChange={togglePersistFunction}
+              checked={persist}
+            ></input>
+            <label htmlFor="persist">Trust This Device</label>
+          </div>
         </div>
       </div>
     </div>

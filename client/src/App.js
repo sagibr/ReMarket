@@ -3,10 +3,12 @@ import "./App.css"
 import Home from "./components/Home"
 import Login from "./components/Login"
 import Navbar from "./components/Navbar"
+import PersistLogin from "./components/PersistLogin"
 import Product from "./components/Product"
 import Products from "./components/Products"
 import Register from "./components/Register"
 import RequireAuth from "./components/RequireAuth"
+import Users from "./components/Users"
 
 function App() {
   const ROLES = {
@@ -18,13 +20,20 @@ function App() {
     <div className="App">
       <Navbar></Navbar>
       <Routes>
-        <Route path="/" element={<Home />} />
         <Route path="register" element={<Register />} />
         <Route path="login" element={<Login />} />
 
-        <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
-          <Route path="products" element={<Products />} />
-          <Route path="product" element={<Product />} />
+        <Route element={<PersistLogin />}>
+          <Route path="/" element={<Home />} />
+
+          <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
+            <Route path="products" element={<Products />} />
+            <Route path="product" element={<Product />} />
+          </Route>
+
+          <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+            <Route path="admin/users" element={<Users />}></Route>
+          </Route>
         </Route>
       </Routes>
     </div>
