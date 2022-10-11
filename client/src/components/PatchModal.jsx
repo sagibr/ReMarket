@@ -1,11 +1,12 @@
 import { yupResolver } from "@hookform/resolvers/yup"
-import axios from "axios"
 import React from "react"
 import { useForm } from "react-hook-form"
 import { useSelector } from "react-redux"
 import * as yup from "yup"
+import axios from "../api/axios"
 
 export default function PatchModal(props) {
+  const UPDATE_ITEM_URL = `/item/items/${props.id}`
   const user = useSelector((state) => state.user.user)
   const schema = yup.object().shape({
     lastPrice: yup.number().required().min(props.price),
@@ -28,16 +29,12 @@ export default function PatchModal(props) {
     const obj = {
       ...data,
       winner: {
-        name: user.name.join(""),
+        name: user.name,
         email: user.email,
       },
     }
     axios
-      .patch(
-        `http://localhost:3001/item/items/${props.id}`,
-        JSON.stringify(obj),
-        config
-      )
+      .patch(UPDATE_ITEM_URL, JSON.stringify(obj), config)
       .then(props.getData())
       .then(setShowModal(false))
   }

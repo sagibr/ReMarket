@@ -2,9 +2,9 @@ import { Disclosure, Menu, Transition } from "@headlessui/react"
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline"
 import { Fragment } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import useLogout from "../hooks/useLogout"
 import { logout } from "../slice/userSlice"
-
 const navigation = [
   { name: "Home", href: "/", current: true },
   { name: "Products", href: "/products" },
@@ -16,7 +16,14 @@ function classNames(...classes) {
 
 export default function Example() {
   const user = useSelector((state) => state.user.user)
-  const dispatch = useDispatch()
+
+  const navigate = useNavigate()
+  const logoutHook = useLogout()
+
+  const signOut = async () => {
+    await logoutHook()
+    navigate("/")
+  }
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -105,8 +112,9 @@ export default function Example() {
                       <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <Menu.Item>
                           {({ active }) => (
-                            <Link to="/" onClick={() => dispatch(logout())}>
+                            <Link to="/">
                               <p
+                                onClick={() => signOut()}
                                 href="/"
                                 className={classNames(
                                   active ? "bg-gray-100" : "",
