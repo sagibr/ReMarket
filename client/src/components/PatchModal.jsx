@@ -1,43 +1,46 @@
-import { yupResolver } from "@hookform/resolvers/yup"
-import React from "react"
-import { useForm } from "react-hook-form"
-import { useSelector } from "react-redux"
-import * as yup from "yup"
-import axios from "../api/axios"
+import { yupResolver } from "@hookform/resolvers/yup";
+import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
+import * as yup from "yup";
+import axios from "../api/axios";
 
 export default function PatchModal(props) {
-  const UPDATE_ITEM_URL = `/item/items/${props.id}`
-  const user = useSelector((state) => state.user.user)
+  const UPDATE_ITEM_URL = `/item/items/${props.id}`;
+  const user = useSelector((state) => state.user.user);
   const schema = yup.object().shape({
     lastPrice: yup.number().required().min(props.price),
-  })
-  const auth = useSelector((state) => state.user.user)
+  });
+  const auth = useSelector((state) => state.user.user);
   const config = {
     headers: {
       Authorization: `Bearer ${auth?.accessToken}`,
       "Content-Type": "application/json",
     },
-  }
-  const [showModal, setShowModal] = React.useState(false)
+  };
+  const [showModal, setShowModal] = React.useState(false);
   const {
     register,
     formState: { errors, isValid },
     handleSubmit,
-  } = useForm({ mode: "onBlur", resolver: yupResolver(schema) })
+  } = useForm({ mode: "onBlur", resolver: yupResolver(schema) });
 
   const onSubmit = (data) => {
     const obj = {
       ...data,
+      bids: props.bids + 1,
       winner: {
         name: user.name,
         email: user.email,
       },
-    }
+    };
     axios
       .patch(UPDATE_ITEM_URL, JSON.stringify(obj), config)
       .then(props.getData())
-      .then(setShowModal(false))
-  }
+      .then(setShowModal(false));
+  };
   return (
     <>
       <button
@@ -101,5 +104,5 @@ export default function PatchModal(props) {
         </>
       ) : null}
     </>
-  )
+  );
 }
