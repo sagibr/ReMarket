@@ -48,7 +48,6 @@ function Login() {
           withCredentials: true,
         }
       )
-      console.log(JSON.stringify(response?.data))
       const accessToken = response?.data?.accessToken
       const roles = response?.data?.roles
       const name = response?.data?.name.join("")
@@ -64,7 +63,6 @@ function Login() {
       setEmail("")
       setPassword("")
       navigate(from, { replace: true })
-      // console.log(auth.accessToken)
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server Response")
@@ -77,13 +75,6 @@ function Login() {
       }
       errRef.current.focus()
     }
-
-    // axios
-    //   .post(`/user/login`, {
-    //     email: email,
-    //     password: password,
-    //   })
-    //   .then((res) => res.data && console.log(res.data))
   }
   return (
     <div className="w-full  flex justify-center items-center mt-32">

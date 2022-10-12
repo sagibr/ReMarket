@@ -1,30 +1,31 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import axios from "../api/axios";
-import Modal from "./Modal";
+import { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
+import { Link } from "react-router-dom"
+import axios from "../api/axios"
+import Modal from "./Modal"
 
 function Products() {
-  const [products, setProducts] = useState([]);
-  const PRODUCT_URL = "/item/items";
-  const auth = useSelector((state) => state.user.user);
+  const [products, setProducts] = useState([])
+  const PRODUCT_URL = "/item/items"
+  const auth = useSelector((state) => state.user.user)
 
   const config = {
     headers: { Authorization: `Bearer ${auth?.accessToken}` },
-  };
+  }
 
-  useEffect(() => {
-    console.log(auth);
+  const getData = () => {
     axios
-
       .get(PRODUCT_URL, config)
-      .then((res) => res.data && setProducts(res.data));
-  }, []);
+      .then((res) => res.data && setProducts(res.data))
+  }
+  useEffect(() => {
+    getData()
+  }, [])
 
   return (
     <div className="w-full text-center">
       <h1 className="text-5xl text-blue-500 mt-10">Browse Products</h1>
-      <Modal />
+      <Modal getData={getData} />
       <div className="flex w-screen flex-wrap">
         {products.map((product, index) => {
           return (
@@ -37,11 +38,11 @@ function Products() {
                 </button>
               </Link>
             </div>
-          );
+          )
         })}
       </div>
     </div>
-  );
+  )
 }
 
-export default Products;
+export default Products
