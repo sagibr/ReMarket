@@ -8,7 +8,6 @@ const useRefreshToken = () => {
   const dispatch = useDispatch()
 
   const refresh = async () => {
-    console.log(user.accessToken)
     //save new access token in response
     const response = await axios.get(REFRESH_URL, {
       withCredentials: true,
@@ -23,7 +22,6 @@ const useRefreshToken = () => {
         roles: response.data.roles,
       })
     )
-    console.log(user.accessToken)
 
     return response.data.accessToken
   }

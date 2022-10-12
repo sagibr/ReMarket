@@ -1,20 +1,20 @@
 import { Disclosure, Menu, Transition } from "@headlessui/react"
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline"
-import { Fragment } from "react"
+import { Fragment, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
 import useLogout from "../hooks/useLogout"
 import { logout } from "../slice/userSlice"
-const navigation = [
-  { name: "Home", href: "/", current: true },
-  { name: "Products", href: "/products" },
-]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ")
 }
 
 export default function Example() {
+  const [navigation, setNavigation] = useState([
+    { name: "Home", href: "/", current: true },
+    { name: "Products", href: "/products" },
+  ])
   const user = useSelector((state) => state.user.user)
 
   const navigate = useNavigate()
@@ -24,6 +24,73 @@ export default function Example() {
     await logoutHook()
     navigate("/")
   }
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
+
+  const updateNavbar = async () => {
+    await sleep(1)
+    const url = window.location.href
+    switch (url) {
+      case "http://localhost:3000/":
+        setNavigation((current) =>
+          current.map((obj) => {
+            if (obj.name === "Home") {
+              return { ...obj, current: true }
+            }
+            if (obj.name === "Products") {
+              return { ...obj, current: false }
+            }
+
+            return obj
+          })
+        )
+        break
+      case "http://localhost:3000/products":
+        setNavigation((current) =>
+          current.map((obj) => {
+            if (obj.name === "Home") {
+              return { ...obj, current: false }
+            }
+            if (obj.name === "Products") {
+              return { ...obj, current: true }
+            }
+
+            return obj
+          })
+        )
+        break
+      case "http://localhost:3000/product":
+        setNavigation((current) =>
+          current.map((obj) => {
+            if (obj.name === "Home") {
+              return { ...obj, current: false }
+            }
+            if (obj.name === "Products") {
+              return { ...obj, current: true }
+            }
+
+            return obj
+          })
+        )
+        break
+      default:
+        setNavigation((current) =>
+          current.map((obj) => {
+            if (obj.name === "Home") {
+              return { ...obj, current: false }
+            }
+            if (obj.name === "Products") {
+              return { ...obj, current: false }
+            }
+
+            return obj
+          })
+        )
+    }
+  }
+
+  useEffect(() => {
+    updateNavbar()
+  }, [window.location.href])
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -58,7 +125,7 @@ export default function Example() {
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-                      <Link to={item.href}>
+                      <Link to={item.href} onClick={() => updateNavbar()}>
                         <p
                           key={item.name}
                           className={classNames(

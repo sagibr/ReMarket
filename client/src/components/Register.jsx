@@ -34,12 +34,10 @@ function Register() {
 
   const REGISTER_URL = "/user/register"
   const onSubmit = async (data) => {
-    // setUsers([...users, data])
     await axios.post(REGISTER_URL, data, {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     })
-    // console.log(users)
   }
 
   return (

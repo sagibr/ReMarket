@@ -1,31 +1,29 @@
-import { yupResolver } from "@hookform/resolvers/yup";
-import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
-import * as yup from "yup";
-import axios from "../api/axios";
+import { yupResolver } from "@hookform/resolvers/yup"
+import React, { useEffect, useState } from "react"
+import { useForm } from "react-hook-form"
+import { useSelector } from "react-redux"
+import * as yup from "yup"
+import axios from "../api/axios"
 
 export default function PatchModal(props) {
-  const UPDATE_ITEM_URL = `/item/items/${props.id}`;
-  const user = useSelector((state) => state.user.user);
+  const UPDATE_ITEM_URL = `/item/items/${props.id}`
+  const user = useSelector((state) => state.user.user)
   const schema = yup.object().shape({
     lastPrice: yup.number().required().min(props.price),
-  });
-  const auth = useSelector((state) => state.user.user);
+  })
   const config = {
     headers: {
-      Authorization: `Bearer ${auth?.accessToken}`,
+      Authorization: `Bearer ${user?.accessToken}`,
       "Content-Type": "application/json",
     },
-  };
-  const [showModal, setShowModal] = React.useState(false);
+  }
+  const [showModal, setShowModal] = React.useState(false)
   const {
     register,
+    watch,
     formState: { errors, isValid },
     handleSubmit,
-  } = useForm({ mode: "onBlur", resolver: yupResolver(schema) });
+  } = useForm({ mode: "onBlur", resolver: yupResolver(schema) })
 
   const onSubmit = (data) => {
     const obj = {
@@ -35,12 +33,12 @@ export default function PatchModal(props) {
         name: user.name,
         email: user.email,
       },
-    };
+    }
     axios
       .patch(UPDATE_ITEM_URL, JSON.stringify(obj), config)
       .then(props.getData())
-      .then(setShowModal(false));
-  };
+      .then(setShowModal(false))
+  }
   return (
     <>
       <button
@@ -80,9 +78,7 @@ export default function PatchModal(props) {
                       )}
                     </div>
                     <input
-                      value="SUBMIT"
                       type="submit"
-                      disabled={!isValid}
                       className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-5"
                     />
                   </form>
@@ -104,5 +100,5 @@ export default function PatchModal(props) {
         </>
       ) : null}
     </>
-  );
+  )
 }

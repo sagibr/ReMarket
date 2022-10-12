@@ -14,7 +14,6 @@ const PersistLogin = () => {
     const verifyRefreshToken = async () => {
       try {
         await refresh()
-        console.log(user)
       } catch (err) {
         console.error(err)
       } finally {
@@ -28,11 +27,6 @@ const PersistLogin = () => {
 
     return () => (isMounted = false)
   }, [])
-
-  useEffect(() => {
-    console.log(`isLoading ${isLoading}`)
-    console.log(`aT ${JSON.stringify(user?.accessToken)}`)
-  }, [isLoading])
 
   return (
     <>{!persist ? <Outlet /> : isLoading ? <p>Loading...</p> : <Outlet />}</>
