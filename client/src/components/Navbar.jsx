@@ -1,101 +1,101 @@
-import { Disclosure, Menu, Transition } from "@headlessui/react"
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline"
-import { Fragment, useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { Link, useNavigate } from "react-router-dom"
-import useLogout from "../hooks/useLogout"
-import { logout } from "../slice/userSlice"
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Fragment, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import useLogout from "../hooks/useLogout";
+import { logout } from "../slice/userSlice";
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(" ")
+  return classes.filter(Boolean).join(" ");
 }
 
 export default function Example() {
   const [navigation, setNavigation] = useState([
     { name: "Home", href: "/", current: true },
     { name: "Products", href: "/products" },
-  ])
-  const user = useSelector((state) => state.user.user)
+  ]);
+  const user = useSelector((state) => state.user.user);
 
-  const navigate = useNavigate()
-  const logoutHook = useLogout()
+  const navigate = useNavigate();
+  const logoutHook = useLogout();
 
   const signOut = async () => {
-    await logoutHook()
-    navigate("/")
-  }
-  const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
+    await logoutHook();
+    navigate("/");
+  };
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
   const updateNavbar = async () => {
-    await sleep(1)
-    const url = window.location.href
+    await sleep(1);
+    const url = window.location.href;
     switch (url) {
       case "http://localhost:3000/":
         setNavigation((current) =>
           current.map((obj) => {
             if (obj.name === "Home") {
-              return { ...obj, current: true }
+              return { ...obj, current: true };
             }
             if (obj.name === "Products") {
-              return { ...obj, current: false }
+              return { ...obj, current: false };
             }
 
-            return obj
+            return obj;
           })
-        )
-        break
+        );
+        break;
       case "http://localhost:3000/products":
         setNavigation((current) =>
           current.map((obj) => {
             if (obj.name === "Home") {
-              return { ...obj, current: false }
+              return { ...obj, current: false };
             }
             if (obj.name === "Products") {
-              return { ...obj, current: true }
+              return { ...obj, current: true };
             }
 
-            return obj
+            return obj;
           })
-        )
-        break
+        );
+        break;
       case "http://localhost:3000/product":
         setNavigation((current) =>
           current.map((obj) => {
             if (obj.name === "Home") {
-              return { ...obj, current: false }
+              return { ...obj, current: false };
             }
             if (obj.name === "Products") {
-              return { ...obj, current: true }
+              return { ...obj, current: true };
             }
 
-            return obj
+            return obj;
           })
-        )
-        break
+        );
+        break;
       default:
         setNavigation((current) =>
           current.map((obj) => {
             if (obj.name === "Home") {
-              return { ...obj, current: false }
+              return { ...obj, current: false };
             }
             if (obj.name === "Products") {
-              return { ...obj, current: false }
+              return { ...obj, current: false };
             }
 
-            return obj
+            return obj;
           })
-        )
+        );
     }
-  }
+  };
 
   useEffect(() => {
-    updateNavbar()
-  }, [window.location.href])
+    updateNavbar();
+  }, [window.location.href]);
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
         <>
-          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 ">
             <div className="relative flex h-16 items-center justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
@@ -258,5 +258,5 @@ export default function Example() {
         </>
       )}
     </Disclosure>
-  )
+  );
 }

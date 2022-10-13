@@ -1,9 +1,9 @@
-import { yupResolver } from "@hookform/resolvers/yup"
-import React from "react"
-import { useForm } from "react-hook-form"
-import { useSelector } from "react-redux"
-import * as yup from "yup"
-import axios from "../api/axios"
+import { yupResolver } from "@hookform/resolvers/yup";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
+import * as yup from "yup";
+import axios from "../api/axios";
 
 const schema = yup.object().shape({
   name: yup.string().required(),
@@ -11,29 +11,29 @@ const schema = yup.object().shape({
   startPrice: yup.number().required(),
   images: yup.string(),
   lastDate: yup.date().required(),
-})
+});
 
 export default function Modal(props) {
-  const auth = useSelector((state) => state.user.user)
+  const auth = useSelector((state) => state.user.user);
   const config = {
     headers: {
       Authorization: `Bearer ${auth?.accessToken}`,
       "Content-Type": "application/json",
     },
-  }
-  const POST_ITEM_URL = "/item/items"
-  const [showModal, setShowModal] = React.useState(false)
+  };
+  const POST_ITEM_URL = "/item/items";
+  const [showModal, setShowModal] = React.useState(false);
   const {
     register,
     formState: { errors, isValid },
     handleSubmit,
-  } = useForm({ mode: "onBlur", resolver: yupResolver(schema) })
+  } = useForm({ mode: "onBlur", resolver: yupResolver(schema) });
 
   const onSubmit = (data) => {
-    axios.post(POST_ITEM_URL, data, config)
-    setShowModal(false)
-    window.location.reload()
-  }
+    axios.post(POST_ITEM_URL, data, config);
+    setShowModal(false);
+    window.location.reload();
+  };
   return (
     <>
       <button
@@ -91,6 +91,9 @@ export default function Modal(props) {
                         Image
                       </label>
                       <input
+                        defaultValue={
+                          "https://static.vecteezy.com/system/resources/previews/004/141/669/original/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg"
+                        }
                         {...register("images")}
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                       />
@@ -152,5 +155,5 @@ export default function Modal(props) {
         </>
       ) : null}
     </>
-  )
+  );
 }

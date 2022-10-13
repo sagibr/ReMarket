@@ -1,35 +1,46 @@
-import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
-import { useLocation } from "react-router-dom"
-import axios from "../api/axios"
-import PatchModal from "./PatchModal"
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
+import axios from "../api/axios";
+import PatchModal from "./PatchModal";
 
 function Product() {
-  const auth = useSelector((state) => state.user.user)
+  const auth = useSelector((state) => state.user.user);
   const config = {
     headers: { Authorization: `Bearer ${auth?.accessToken}` },
-  }
+  };
 
-  const [theItem, setTheItem] = useState({})
-  const location = useLocation()
-  const { id } = location.state
-  const GET_ITEM_URL = `/item/items/${id}`
+  const [theItem, setTheItem] = useState({});
+  const location = useLocation();
+  const { id } = location.state;
+  const GET_ITEM_URL = `/item/items/${id}`;
   const getData = (set) => {
-    axios.get(GET_ITEM_URL, config).then((res) => res.data && set(res.data))
-  }
+    axios.get(GET_ITEM_URL, config).then((res) => res.data && set(res.data));
+  };
 
   useEffect(() => {
-    getData(setTheItem)
-  }, [])
-  const date = new Date(theItem[0]?.lastDate)
-  const date1 = new Date(theItem[0]?.startDate)
-  date.setHours(0, 0, 0, 0)
-  date1.setHours(0, 0, 0, 0)
+    getData(setTheItem);
+  }, []);
+
+  const today = new Date();
+
+  setTimeout(function TodaysDate() {
+    today = new Date();
+    setTimeout(TodaysDate, 60000);
+  }, 60000);
+
+  const date = new Date(theItem[0]?.lastDate);
+  const date1 = new Date(theItem[0]?.startDate);
+  date.setHours(0, 0, 0, 0);
+  date1.setHours(0, 0, 0, 0);
   function padTo2Digits(num) {
-    return num.toString().padStart(2, "0")
+    return num.toString().padStart(2, "0");
   }
+  let expired = false;
+  today < date ? (expired = false) : (expired = true);
+  console.log(expired);
   return (
-    <div className="w-screen flex justify-around items-center mt-10">
+    <div className="w-screen flex justify-around items-center mt-10 overflow-hidden">
       <div className="max-w-md rounded overflow-hidden shadow-lg flex flex-col items-center">
         <img
           className="w-60"
@@ -69,16 +80,46 @@ function Product() {
           </span>
         </div>
       </div>
-      <PatchModal
-        id={theItem[0]?._id}
-        price={
-          theItem[0]?.lastPrice ? theItem[0]?.lastPrice : theItem[0]?.startPrice
-        }
-        getData={() => getData(setTheItem)}
-        bids={theItem[0]?.bids}
-      />
+      <div className="h-80 flex flex-col justify-around">
+        <PatchModal
+          expired={expired}
+          id={theItem[0]?._id}
+          price={
+            theItem[0]?.lastPrice
+              ? theItem[0]?.lastPrice
+              : theItem[0]?.startPrice
+          }
+          getData={() => getData(setTheItem)}
+          bids={theItem[0]?.bids}
+        />
+        {expired ? (
+          <div>
+            <h1 className="text-blue-500 text-2xl underline text-center mb-4">
+              Won:
+            </h1>
+            <h1 className="text-blue-400 text-lg mb-2">
+              Name: {theItem[0]?.winner?.name}
+            </h1>
+            <h1 className="text-blue-400 text-lg">
+              Email: {theItem[0]?.winner?.email}
+            </h1>
+          </div>
+        ) : (
+          <div>
+            <h1 className="text-blue-500 text-2xl underline text-center mb-4">
+              Current winner
+            </h1>
+            <h1 className="text-blue-400 text-lg mb-2">
+              Name: {theItem[0]?.winner.name}
+            </h1>
+            <h1 className="text-blue-400 text-lg">
+              Email: {theItem[0]?.winner.email}
+            </h1>
+          </div>
+        )}
+      </div>
     </div>
-  )
+  );
 }
 
-export default Product
+export default Product;
