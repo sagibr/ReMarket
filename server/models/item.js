@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const ItemSchema = mongoose.Schema({
+  publisher: { type: String, required: true },
   name: { type: String, required: true },
   description: { type: String, required: true },
   images: {

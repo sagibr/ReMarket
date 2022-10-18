@@ -30,7 +30,8 @@ export default function Modal(props) {
   } = useForm({ mode: "onBlur", resolver: yupResolver(schema) });
 
   const onSubmit = (data) => {
-    axios.post(POST_ITEM_URL, data, config);
+    const newData = { ...data, publisher: auth.email };
+    axios.post(POST_ITEM_URL, newData, config);
     setShowModal(false);
     window.location.reload();
   };
