@@ -9,7 +9,16 @@ export default function PatchModal(props) {
   const UPDATE_ITEM_URL = `/item/items/${props.id}`;
   const user = useSelector((state) => state.user.user);
   const schema = yup.object().shape({
-    lastPrice: yup.number().required().min(props.price),
+    lastPrice: yup
+      .number()
+      .required()
+      .min(
+        props.price > 0 && props.price < 1000
+          ? props.price + 50
+          : props.price >= 1000 && props.price < 2000
+          ? props.price + 100
+          : props.price + 200
+      ),
   });
   const config = {
     headers: {

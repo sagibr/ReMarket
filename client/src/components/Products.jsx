@@ -24,7 +24,9 @@ function Products() {
 
   return (
     <div className="w-full text-center">
-      <h1 className="text-5xl text-blue-500 mt-10">Browse Products</h1>
+      <h1 className="text-5xl text-black mt-10 underline font-bold decoration-blue-500 italic">
+        Browse - Products
+      </h1>
       <Modal getData={getData} />
       <div className="flex flex-wrap overflow-hidden justify-evenly">
         {products.map((product, index) => {
