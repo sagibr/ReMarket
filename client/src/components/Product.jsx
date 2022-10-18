@@ -21,8 +21,6 @@ function Product() {
   useEffect(() => {
     getData(setTheItem);
   }, []);
-  const user = useSelector((state) => state.user.user);
-  console.log(user.roles);
   const today = new Date();
 
   setTimeout(function TodaysDate() {
@@ -82,19 +80,26 @@ function Product() {
         </div>
       </div>
       <div className="h-80 flex flex-col justify-around">
-        <PatchModal
-          expired={expired}
-          id={theItem[0]?._id}
-          price={
-            theItem[0]?.lastPrice
-              ? theItem[0]?.lastPrice
-              : theItem[0]?.startPrice
-          }
-          getData={() => getData(setTheItem)}
-          bids={theItem[0]?.bids}
-        />
+        {theItem[0]?.publisher === auth.email ? (
+          <h1 className="text-3xl text-blue-500 text-center">
+            Your {theItem[0]?.name}
+          </h1>
+        ) : (
+          <PatchModal
+            expired={expired}
+            id={theItem[0]?._id}
+            price={
+              theItem[0]?.lastPrice
+                ? theItem[0]?.lastPrice
+                : theItem[0]?.startPrice
+            }
+            getData={() => getData(setTheItem)}
+            bids={theItem[0]?.bids}
+          />
+        )}
 
-        {user.roles.find((role) => role === 5150) ? (
+        {auth.roles.find((role) => role === 5150) ||
+        auth.email === theItem[0]?.publisher ? (
           expired ? (
             <div>
               <h1 className="text-blue-500 text-2xl underline text-center mb-4">
@@ -121,7 +126,7 @@ function Product() {
             </div>
           ) : (
             <h1 className="text-blue-500 text-2xl underline text-center mb-4">
-              No bids yet, be the first!
+              No bids yet.
             </h1>
           )
         ) : (

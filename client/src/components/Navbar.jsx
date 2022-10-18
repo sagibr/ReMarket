@@ -112,12 +112,12 @@ export default function Example() {
                 <div className="flex flex-shrink-0 items-center">
                   <img
                     className="block h-8 w-auto lg:hidden"
-                    src="https://pps.whatsapp.net/v/t61.24694-24/294240288_737344717498710_6107413829790180793_n.jpg?ccb=11-4&oh=01_AVxW-vF3AhTWbEkVB270f2etkq70Gscq1zt0QXH9ijiNWw&oe=6348BB42"
+                    src="https://pps.whatsapp.net/v/t61.24694-24/294240288_737344717498710_6107413829790180793_n.jpg?ccb=11-4&oh=01_AdSAAS5zjtqdy-bkm6Q4feVoQIiddDxlbRj-tQKtdAjIYw&oe=635EB442"
                     alt="Your Company"
                   />
                   <img
                     className="hidden h-8 w-auto lg:block"
-                    src="https://pps.whatsapp.net/v/t61.24694-24/294240288_737344717498710_6107413829790180793_n.jpg?ccb=11-4&oh=01_AVxW-vF3AhTWbEkVB270f2etkq70Gscq1zt0QXH9ijiNWw&oe=6348BB42"
+                    src="https://pps.whatsapp.net/v/t61.24694-24/294240288_737344717498710_6107413829790180793_n.jpg?ccb=11-4&oh=01_AdSAAS5zjtqdy-bkm6Q4feVoQIiddDxlbRj-tQKtdAjIYw&oe=635EB442"
                     alt="Your Company"
                   />
                 </div>
@@ -179,6 +179,21 @@ export default function Example() {
                                 )}
                               >
                                 Log-Out
+                              </p>
+                            </Link>
+                          )}
+                        </Menu.Item>
+                        <Menu.Item>
+                          {({ active }) => (
+                            <Link to="/myproducts">
+                              <p
+                                href="/"
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "block px-4 py-2 text-sm text-gray-700"
+                                )}
+                              >
+                                My-Products
                               </p>
                             </Link>
                           )}
