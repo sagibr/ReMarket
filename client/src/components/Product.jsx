@@ -21,7 +21,8 @@ function Product() {
   useEffect(() => {
     getData(setTheItem);
   }, []);
-
+  const user = useSelector((state) => state.user.user);
+  console.log(user.roles);
   const today = new Date();
 
   setTimeout(function TodaysDate() {
@@ -92,30 +93,39 @@ function Product() {
           getData={() => getData(setTheItem)}
           bids={theItem[0]?.bids}
         />
-        {expired ? (
-          <div>
+
+        {user.roles.find((role) => role === 5150) ? (
+          expired ? (
+            <div>
+              <h1 className="text-blue-500 text-2xl underline text-center mb-4">
+                Won:
+              </h1>
+              <h1 className="text-blue-400 text-lg mb-2">
+                Name: {theItem[0]?.winner?.name}
+              </h1>
+              <h1 className="text-blue-400 text-lg">
+                Email: {theItem[0]?.winner?.email}
+              </h1>
+            </div>
+          ) : theItem[0]?.winner ? (
+            <div>
+              <h1 className="text-blue-500 text-2xl underline text-center mb-4">
+                Current winner
+              </h1>
+              <h1 className="text-blue-400 text-lg mb-2">
+                Name: {theItem[0]?.winner?.name}
+              </h1>
+              <h1 className="text-blue-400 text-lg">
+                Email: {theItem[0]?.winner?.email}
+              </h1>
+            </div>
+          ) : (
             <h1 className="text-blue-500 text-2xl underline text-center mb-4">
-              Won:
+              No bids yet, be the first!
             </h1>
-            <h1 className="text-blue-400 text-lg mb-2">
-              Name: {theItem[0]?.winner?.name}
-            </h1>
-            <h1 className="text-blue-400 text-lg">
-              Email: {theItem[0]?.winner?.email}
-            </h1>
-          </div>
+          )
         ) : (
-          <div>
-            <h1 className="text-blue-500 text-2xl underline text-center mb-4">
-              Current winner
-            </h1>
-            <h1 className="text-blue-400 text-lg mb-2">
-              Name: {theItem[0]?.winner.name}
-            </h1>
-            <h1 className="text-blue-400 text-lg">
-              Email: {theItem[0]?.winner.email}
-            </h1>
-          </div>
+          <></>
         )}
       </div>
     </div>
