@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+# ReMarket
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+ReMarket is a bidding website. In the website, each user can create his own account and upload an item/items, that he's willing to sell. There is an option to bid the items that other users uploaded, and see your item current highest bid.
+Each item has a last date to the bid.
 
-## Available Scripts
+## Table Of Contents
 
-In the project directory, you can run:
+- [ReMarket](#ReMarket)
+  - [Why was ReMarket made](#Why-was-ReMarket-made)
+  - [Running the project](#running-the-project)
+  - [Screenshots](#screenshots)
+    - [ReMarket products](#ReMarket-products)
+    - [Goolo Recommendations](#Goolo-Recommendations)
+  - [Technologies](#technologies)
+    - [Client-Side](#client-side)
+    - [Server-Side](#server-side)
+  - [Whats Next](#whats-next)
+  - [Be a contribute](#be-a-contribute)
 
-### `npm start`
+## Why was ReMarket made
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+ReMarket was made as a part of a FullStack course in order to understand better the security and authentication of a web aplication
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Running the project
 
-### `npm test`
+1. Clone the repo.
+2. Run `npm install`.
+3. enter the server folder.
+4. run `nodemon server.js`.
+5. go back to the root folder.
+6. Run `npm start`.
+7. Navigate to `http://localhost:3000`.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Screenshots
 
-### `npm run build`
+### ReMarket products
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+All of the products for sale, bid the one you like!
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<p align="center"><img src="./readmeImg.png" width="300" /></p>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Technologies:
 
-### `npm run eject`
+### Client-side:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- React.JS
+- Redux
+- TailWind
+- Axios
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Server-side:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Node.JS
+- Express
+- MongooDB
+- JWT
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## What's next:
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Interactive filtering system with featured products.
+2. Improved UI.
