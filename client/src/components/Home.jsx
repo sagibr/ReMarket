@@ -19,7 +19,7 @@ function Home() {
           </h1>
         </div>
         <p className="text-black text-center opacity-50 mt-32">
-          #All rights reserved to Sagi and Noam the kings company
+          #All rights reserved to ReMarket company
         </p>
       </div>
     </main>
