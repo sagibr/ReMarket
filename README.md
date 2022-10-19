@@ -10,12 +10,10 @@ Each item has a last date to the bid.
   - [Running the project](#running-the-project)
   - [Screenshots](#screenshots)
     - [ReMarket products](#ReMarket-products)
-    - [Goolo Recommendations](#Goolo-Recommendations)
   - [Technologies](#technologies)
     - [Client-Side](#client-side)
     - [Server-Side](#server-side)
   - [Whats Next](#whats-next)
-  - [Be a contribute](#be-a-contribute)
 
 ## Why was ReMarket made
 
