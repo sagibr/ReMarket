@@ -1,16 +1,16 @@
 const express = require("express")
 const app = express()
-const itemRoutes = require("./routes/item/itemApi")
-const userRoutes = require("./routes/user/userApi")
-const adminRoutes = require("./routes/admin/admin")
-const connectDB = require("./config/dbConn")
-const credentials = require("./middleware/credentials")
-const corsOptions = require("./config/corsOptions")
+const itemRoutes = require("./routes/item/itemApi.js")
+const userRoutes = require("./routes/user/userApi.js")
+const adminRoutes = require("./routes/admin/admin.js")
+const connectDB = require("./config/dbConn.js")
+const credentials = require("./middleware/credentials.js")
+const corsOptions = require("./config/corsOptions.js")
 
 const cookieParser = require("cookie-parser")
 const cors = require("cors")
 const { default: mongoose } = require("mongoose")
-const verifyJWT = require("./middleware/verifyJwt")
+const verifyJWT = require("./middleware/verifyJwt.js")
 const PORT = process.env.PORT || 3001
 
 // Connect to MongoDB
