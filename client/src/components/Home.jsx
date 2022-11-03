@@ -1,7 +1,7 @@
-import { useSelector } from "react-redux";
+import { useSelector } from "react-redux"
 
 function Home() {
-  const user = useSelector((state) => state.user.user);
+  const user = useSelector((state) => state.user.user)
 
   return (
     <main className="h-[89vh]   mx-auto max-w-7xl px-4  sm:px-6  lg:px-8  bg-gradient-to-r from-gray-800 to-gray-600">
@@ -23,7 +23,7 @@ function Home() {
         </p>
       </div>
     </main>
-  );
+  )
 }
 
-export default Home;
+export default Home
