@@ -1,4 +1,4 @@
-const User = require("../models/user")
+import User from "../models/user"
 
 const handleLogout = async (req, res) => {
   //On client, also delete the accessToken
@@ -30,4 +30,4 @@ const handleLogout = async (req, res) => {
   })
   return res.sendStatus(204)
 }
-module.exports = { handleLogout }
+export default { handleLogout }

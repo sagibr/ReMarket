@@ -1,28 +1,28 @@
-const express = require(`express`)
-const router = express.Router()
+import { Router } from `express`
+const router = Router()
 
-const User = require(`../../models/user`)
-const Items = require("../../models/item")
+import { findOneAndDelete as _findOneAndDelete } from "../../models/item"
+import { find, findOneAndDelete } from `../../models/user`
 
-const verifyRoles = require("../../middleware/verifyRoles")
-const ROLES_LIST = require("../../config/roles_list")
+import { Admin } from "../../config/roles_list"
+import verifyRoles from "../../middleware/verifyRoles"
 
-router.get("/users", verifyRoles(ROLES_LIST.Admin), (req, res, next) => {
-  User.find()
+router.get("/users", verifyRoles(Admin), (req, res, next) => {
+  find()
     .then((data) => res.json(data))
     .catch(next)
 })
 
 router.delete(`/users/:id`, (req, res, next) => {
-  User.findOneAndDelete({ _id: req.params.id })
+  findOneAndDelete({ _id: req.params.id })
     .then((data) => res.json(data))
     .catch(next)
 })
 
-router.delete("/items/:id", verifyRoles(ROLES_LIST.Admin), (req, res, next) => {
-  Items.findOneAndDelete({ _id: req.params.id })
+router.delete("/items/:id", verifyRoles(Admin), (req, res, next) => {
+  _findOneAndDelete({ _id: req.params.id })
     .then((data) => res.json(data))
     .catch(next)
 })
 
-module.exports = router
+export default router

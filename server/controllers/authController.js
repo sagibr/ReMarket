@@ -1,6 +1,6 @@
-const bcrypt = require("bcrypt")
-const User = require(`../models/user`)
-const jwt = require("jsonwebtoken")
+import { compare } from "bcrypt"
+import { sign } from "jsonwebtoken"
+import User from `../models/user`
 require("dotenv").config()
 
 const handleLogin = async (req, res) => {
@@ -13,17 +13,17 @@ const handleLogin = async (req, res) => {
   if (!foundUser) return res.sendStatus(401) //Unauthorized
 
   //evaluate password
-  const match = await bcrypt.compare(password, foundUser.password)
+  const match = await compare(password, foundUser.password)
   if (match) {
     const roles = Object.values(foundUser.roles).filter(Boolean)
     const name = Object.values(foundUser.name)
     //create JWTs
-    const accessToken = jwt.sign(
+    const accessToken = sign(
       { UserInfo: { email: foundUser.email, roles: roles } },
       process.env.ACCESS_TOKEN_SECRET,
       { expiresIn: "15m" }
     )
-    const refreshToken = jwt.sign(
+    const refreshToken = sign(
       { email: foundUser.email },
       process.env.REFRESH_TOKEN_SECRET,
       { expiresIn: "1d" }
@@ -45,4 +45,4 @@ const handleLogin = async (req, res) => {
   }
 }
 
-module.exports = { handleLogin }
+export default { handleLogin }

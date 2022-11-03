@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt")
-const User = require(`../models/user`)
+const User = require(`../models/user`).default
 require("dotenv").config()
 
 const handleNewUser = async (req, res) => {
