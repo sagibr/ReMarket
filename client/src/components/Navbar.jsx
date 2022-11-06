@@ -29,7 +29,7 @@ export default function Example() {
     await sleep(1)
     const url = window.location.href
     switch (url) {
-      case "http://localhost:3000/":
+      case "https://remarket-client.netlify.app/":
         setNavigation((current) =>
           current.map((obj) => {
             if (obj.name === "Home") {
@@ -43,7 +43,7 @@ export default function Example() {
           })
         )
         break
-      case "http://localhost:3000/products":
+      case "https://remarket-client.netlify.app/products":
         setNavigation((current) =>
           current.map((obj) => {
             if (obj.name === "Home") {
@@ -57,7 +57,7 @@ export default function Example() {
           })
         )
         break
-      case "http://localhost:3000/product":
+      case "https://remarket-client.netlify.app/product":
         setNavigation((current) =>
           current.map((obj) => {
             if (obj.name === "Home") {
