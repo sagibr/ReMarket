@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
 import useAxiosPrivate from "../hooks/useAxiosPrivate"
 import useRefreshToken from "../hooks/useRefreshToken"
 
@@ -15,12 +14,6 @@ const Users = () => {
   const [users, setUsers] = useState()
 
   const axiosPrivate = useAxiosPrivate()
-
-  const user = useSelector((state) => state.user.user)
-
-  const config = {
-    headers: { Authorization: `Bearer ${user?.accessToken}` },
-  }
 
   useEffect(() => {
     let isMounted = true
@@ -43,6 +36,7 @@ const Users = () => {
       isMounted = false
       controller.abort()
     }
+    // eslint-disable-next-line
   }, [])
   return (
     <article>

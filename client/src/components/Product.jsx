@@ -1,43 +1,44 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
-import axios from "../api/axios";
-import PatchModal from "./PatchModal";
+import { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
+import { useLocation } from "react-router-dom"
+import axios from "../api/axios"
+import PatchModal from "./PatchModal"
 
 function Product() {
-  const auth = useSelector((state) => state.user.user);
+  const auth = useSelector((state) => state.user.user)
   const config = {
     headers: { Authorization: `Bearer ${auth?.accessToken}` },
-  };
+  }
 
-  const [theItem, setTheItem] = useState({});
-  const location = useLocation();
-  const { id } = location.state;
-  const GET_ITEM_URL = `/item/items/${id}`;
+  const [theItem, setTheItem] = useState({})
+  const location = useLocation()
+  const { id } = location.state
+  const GET_ITEM_URL = `/item/items/${id}`
   const getData = (set) => {
-    axios.get(GET_ITEM_URL, config).then((res) => res.data && set(res.data));
-  };
+    axios.get(GET_ITEM_URL, config).then((res) => res.data && set(res.data))
+  }
 
   useEffect(() => {
-    getData(setTheItem);
-  }, []);
-  const today = new Date();
+    getData(setTheItem)
+    // eslint-disable-next-line
+  }, [])
+  let today = new Date()
 
   setTimeout(function TodaysDate() {
-    today = new Date();
-    setTimeout(TodaysDate, 60000);
-  }, 60000);
+    today = new Date()
+    setTimeout(TodaysDate, 60000)
+  }, 60000)
 
-  const date = new Date(theItem[0]?.lastDate);
-  const date1 = new Date(theItem[0]?.startDate);
-  date.setHours(0, 0, 0, 0);
-  date1.setHours(0, 0, 0, 0);
+  const date = new Date(theItem[0]?.lastDate)
+  const date1 = new Date(theItem[0]?.startDate)
+  date.setHours(0, 0, 0, 0)
+  date1.setHours(0, 0, 0, 0)
   function padTo2Digits(num) {
-    return num.toString().padStart(2, "0");
+    return num.toString().padStart(2, "0")
   }
-  let expired = false;
-  today < date ? (expired = false) : (expired = true);
-  console.log(expired);
+  let expired = false
+  today < date ? (expired = false) : (expired = true)
+  console.log(expired)
   return (
     <div className="w-screen flex justify-around items-center mt-10 overflow-hidden">
       <div className="max-w-md rounded overflow-hidden shadow-lg flex flex-col items-center">
@@ -134,7 +135,7 @@ function Product() {
         )}
       </div>
     </div>
-  );
+  )
 }
 
-export default Product;
+export default Product

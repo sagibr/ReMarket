@@ -1,5 +1,4 @@
 import { yupResolver } from "@hookform/resolvers/yup"
-import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import * as yup from "yup"
 import axios from "../api/axios"
@@ -24,8 +23,6 @@ const schema = yup.object().shape({
 })
 
 function Register() {
-  const [users, setUsers] = useState()
-
   const {
     register,
     formState: { errors, isValid },

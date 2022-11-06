@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import { Outlet } from "react-router"
 import useRefreshToken from "../hooks/useRefreshToken"
 
@@ -26,6 +26,7 @@ const PersistLogin = () => {
       : setIsLoading(false)
 
     return () => (isMounted = false)
+    // eslint-disable-next-line
   }, [])
 
   return (

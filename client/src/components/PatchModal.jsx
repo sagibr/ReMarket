@@ -1,13 +1,13 @@
-import { yupResolver } from "@hookform/resolvers/yup";
-import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
-import * as yup from "yup";
-import axios from "../api/axios";
+import { yupResolver } from "@hookform/resolvers/yup"
+import React from "react"
+import { useForm } from "react-hook-form"
+import { useSelector } from "react-redux"
+import * as yup from "yup"
+import axios from "../api/axios"
 
 export default function PatchModal(props) {
-  const UPDATE_ITEM_URL = `/item/items/${props.id}`;
-  const user = useSelector((state) => state.user.user);
+  const UPDATE_ITEM_URL = `/item/items/${props.id}`
+  const user = useSelector((state) => state.user.user)
   const schema = yup.object().shape({
     lastPrice: yup
       .number()
@@ -19,20 +19,22 @@ export default function PatchModal(props) {
           ? props.price + 100
           : props.price + 200
       ),
-  });
+  })
   const config = {
     headers: {
       Authorization: `Bearer ${user?.accessToken}`,
       "Content-Type": "application/json",
     },
-  };
-  const [showModal, setShowModal] = React.useState(false);
+  }
+  const [showModal, setShowModal] = React.useState(false)
   const {
     register,
+    // eslint-disable-next-line
     watch,
+    // eslint-disable-next-line
     formState: { errors, isValid },
     handleSubmit,
-  } = useForm({ mode: "onBlur", resolver: yupResolver(schema) });
+  } = useForm({ mode: "onBlur", resolver: yupResolver(schema) })
 
   const onSubmit = (data) => {
     const obj = {
@@ -42,12 +44,12 @@ export default function PatchModal(props) {
         name: user.name,
         email: user.email,
       },
-    };
+    }
     axios
       .patch(UPDATE_ITEM_URL, JSON.stringify(obj), config)
       .then(props.getData())
-      .then(setShowModal(false));
-  };
+      .then(setShowModal(false))
+  }
   return (
     <>
       {props.expired ? (
@@ -126,5 +128,5 @@ export default function PatchModal(props) {
         </div>
       )}
     </>
-  );
+  )
 }

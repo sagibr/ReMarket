@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { Link, useLocation, useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import axios from "../api/axios"
 import { togglePersist } from "../slice/persistSlice"
 import { login } from "../slice/userSlice"

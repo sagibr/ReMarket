@@ -1,24 +1,25 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import axios from "../api/axios";
+import { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
+import { Link } from "react-router-dom"
+import axios from "../api/axios"
 
 const MyProducts = () => {
-  const [theItems, setTheItems] = useState();
-  const auth = useSelector((state) => state.user.user);
+  const [theItems, setTheItems] = useState()
+  const auth = useSelector((state) => state.user.user)
   const config = {
     headers: { Authorization: `Bearer ${auth?.accessToken}` },
-  };
-  console.log(auth.email);
+  }
+  console.log(auth.email)
   const GetData = (set) => {
     axios
       .post(`/item/items/${auth.email}`, {}, config)
-      .then((res) => res.data && set(res.data));
-  };
+      .then((res) => res.data && set(res.data))
+  }
   useEffect(() => {
-    GetData(setTheItems);
-  }, []);
-  console.log(theItems);
+    GetData(setTheItems)
+    // eslint-disable-next-line
+  }, [])
+  console.log(theItems)
   return (
     <div className="flex flex-wrap overflow-hidden justify-evenly">
       {theItems?.map((item, index) => {
@@ -39,9 +40,9 @@ const MyProducts = () => {
               </button>
             </Link>
           </div>
-        );
+        )
       })}
     </div>
-  );
-};
-export default MyProducts;
+  )
+}
+export default MyProducts
