@@ -24,8 +24,8 @@ function Products() {
   }, [])
 
   return (
-    <div className="w-full text-center">
-      <h1 className="text-5xl text-black mt-10 underline font-bold decoration-blue-500 italic">
+    <div className="w-full text-center ">
+      <h1 className="text-5xl text-black mt-10  font-bold  italic">
         Browse - Products
       </h1>
       <Modal getData={getData} />
@@ -39,7 +39,7 @@ function Products() {
               <h1 className="text-3xl">{product.name}</h1>
               <img src={product.images} alt="" className="mt-8" />
               <Link to="/product" state={{ id: product._id }}>
-                <button className="bg-black hover:text-red-700  mt-5 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                <button className="bg-blue-600 hover:bg-blue-500  mt-5 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                   More info
                 </button>
               </Link>

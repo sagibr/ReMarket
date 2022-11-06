@@ -35,7 +35,7 @@ const MyProducts = () => {
               state={{ id: item._id }}
               className="text-center"
             >
-              <button className="bg-black hover:text-red-700  mt-5 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+              <button className="bg-blue-600 hover:bg-blue-500  mt-5 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                 More info
               </button>
             </Link>

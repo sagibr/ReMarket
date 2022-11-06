@@ -4,6 +4,7 @@ import { Fragment, useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
 import useLogout from "../hooks/useLogout"
+import Remarket from "../Remarket.png"
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ")
@@ -92,10 +93,11 @@ export default function Example() {
     // eslint-disable-next-line
   }, [window.location.href])
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure as="nav" className="bg-white">
       {({ open }) => (
         <>
-          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 ">
+          <img src={Remarket} className="absolute top-0 left-12 w-24 "></img>
+          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 mt-3 ">
             <div className="relative flex h-16 items-center justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
@@ -110,28 +112,16 @@ export default function Example() {
               </div>
 
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                <div className="flex flex-shrink-0 items-center">
-                  <img
-                    className="block h-8 w-auto lg:hidden"
-                    src="https://pps.whatsapp.net/v/t61.24694-24/294240288_737344717498710_6107413829790180793_n.jpg?ccb=11-4&oh=01_AdSAAS5zjtqdy-bkm6Q4feVoQIiddDxlbRj-tQKtdAjIYw&oe=635EB442"
-                    alt="Your Company"
-                  />
-                  <img
-                    className="hidden h-8 w-auto lg:block"
-                    src="https://pps.whatsapp.net/v/t61.24694-24/294240288_737344717498710_6107413829790180793_n.jpg?ccb=11-4&oh=01_AdSAAS5zjtqdy-bkm6Q4feVoQIiddDxlbRj-tQKtdAjIYw&oe=635EB442"
-                    alt="Your Company"
-                  />
-                </div>
                 <div className="hidden sm:ml-6 sm:block">
-                  <div className="flex space-x-4">
+                  <div className="flex space-x-4 ml-14">
                     {navigation.map((item) => (
                       <Link to={item.href} onClick={() => updateNavbar()}>
                         <p
                           key={item.name}
                           className={classNames(
                             item.current
-                              ? "bg-gray-900 text-white"
-                              : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                              ? " text-gray-400"
+                              : "text-black hover:text-gray-400 ",
                             "px-3 py-2 rounded-md text-sm font-medium"
                           )}
                           aria-current={item.current ? "page" : undefined}
@@ -143,18 +133,16 @@ export default function Example() {
                   </div>
                 </div>
               </div>
-              <h1 className="font-bold text-gray-100"> {user.name}</h1>
 
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <Menu as="div" className="relative ml-3">
                   <div>
-                    <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 focus:ring-offset-gray-800">
+                    <Menu.Button className="flex bg-blue-600 rounded-lg p-1 hover:bg-blue-500 ">
                       <span className="sr-only">Open user menu</span>
-                      <img
-                        className="h-8 w-8 rounded-full"
-                        src="https://pps.whatsapp.net/v/t61.24694-24/215742736_169130348833804_5618789588749101516_n.jpg?ccb=11-4&oh=01_AVxCtQYSX2EbN2U0Y04R7EjMMI3dgqM8JDIFWqIQrsYFzg&oe=63489F59"
-                        alt=""
-                      />
+
+                      <h1 className=" font-bold text-md text-white ">
+                        {user.name ? user.name : "Join Now"}
+                      </h1>
                     </Menu.Button>
                   </div>
                   <Transition
