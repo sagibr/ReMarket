@@ -10,7 +10,7 @@ const corsOptions = require("./config/corsOptions.js")
 const cookieParser = require("cookie-parser")
 const cors = require("cors")
 const { default: mongoose } = require("mongoose")
-const verifyJWT = require("./middleware/verifyJwt.js")
+const verifyJWT = require("./middleware/verifyJWT.js")
 const PORT = process.env.PORT || 3001
 
 // Connect to MongoDB
