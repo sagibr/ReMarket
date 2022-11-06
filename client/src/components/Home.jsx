@@ -1,9 +1,6 @@
-import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 
 function Home() {
-  const user = useSelector((state) => state.user.user)
-
   return (
     <main className="h-[89vh] w-screen  bg-gradient-to-t from-blue-200  to-white   ">
       <br></br>
