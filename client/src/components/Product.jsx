@@ -40,7 +40,7 @@ function Product() {
   today < date ? (expired = false) : (expired = true)
   console.log(expired)
   return (
-    <div className="w-screen flex justify-around items-center mt-10 overflow-hidden">
+    <div className="w-screen flex justify-around items-center mt-10 overflow-hidden flex-col">
       <div className="max-w-md rounded overflow-hidden shadow-lg flex flex-col items-center">
         <img
           className="w-60"
@@ -80,7 +80,7 @@ function Product() {
           </span>
         </div>
       </div>
-      <div className="h-80 flex flex-col justify-around">
+      <div className=" flex flex-col justify-around">
         {theItem[0]?.publisher === auth.email ? (
           <h1 className="text-3xl text-blue-500 text-center">
             Your {theItem[0]?.name}
