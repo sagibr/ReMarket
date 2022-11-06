@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { Outlet } from "react-router"
 import useRefreshToken from "../hooks/useRefreshToken"
+import Loading from "./Loading"
 
 const PersistLogin = () => {
   const [isLoading, setIsLoading] = useState(true)
@@ -29,9 +30,7 @@ const PersistLogin = () => {
     // eslint-disable-next-line
   }, [])
 
-  return (
-    <>{!persist ? <Outlet /> : isLoading ? <p>Loading...</p> : <Outlet />}</>
-  )
+  return <>{!persist ? <Outlet /> : isLoading ? <Loading /> : <Outlet />}</>
 }
 
 export default PersistLogin

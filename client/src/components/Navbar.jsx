@@ -99,7 +99,7 @@ export default function Example() {
           <img
             alt="logo"
             src={Remarket}
-            className="absolute top-0 left-12 w-24 "
+            className="absolute top-0 left-8 w-24 "
           ></img>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 mt-3 ">
             <div className="relative flex h-16 items-center justify-between">
