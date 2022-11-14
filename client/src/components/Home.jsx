@@ -11,7 +11,7 @@ function Home() {
             <span className="block text-blue-600 xl:inline">Has To Offer</span>
             <br></br>
             <span className="block text-gray-400 text-2xl text-center">
-              buying and selling on every platform
+              buying and selling on every platform!
             </span>
           </h1>
           <Link to={"/products"} className="m-auto mt-20">
